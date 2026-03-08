@@ -12,8 +12,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { FileTextIcon, DownloadIcon } from 'lucide-react';
+import { FileTextIcon, DownloadIcon, PencilLineIcon, EyeIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { ResizeHandle } from '@/components/resize-handle';
+import { cn } from '@/lib/utils';
 
 const STORAGE_KEY = 'leafpad-markdown';
 
@@ -30,6 +32,8 @@ function downloadFile(filename: string, content: string, type: string) {
 export function MarkdownWorkspace() {
   const editorRef = useRef<CodeEditorHandle>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [splitFraction, setSplitFraction] = useState(0.5);
   const [markdown, setMarkdown] = useState(() => {
     if (typeof window === 'undefined') return '';
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -40,6 +44,7 @@ export function MarkdownWorkspace() {
     () => true,
     () => false
   );
+  const [mobileTab, setMobileTab] = useState<'editor' | 'preview'>('editor');
   const saveTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   // Debounced save to localStorage
@@ -119,10 +124,44 @@ export function MarkdownWorkspace() {
         </div>
       </div>
 
-      {/* Split pane */}
-      <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+      {/* Mobile tab bar */}
+      <div className="flex border-b md:hidden">
+        <button
+          onClick={() => setMobileTab('editor')}
+          className={cn(
+            'flex flex-1 items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors',
+            mobileTab === 'editor'
+              ? 'border-primary text-foreground border-b-2'
+              : 'text-muted-foreground'
+          )}
+        >
+          <PencilLineIcon className="size-3.5" />
+          Editor
+        </button>
+        <button
+          onClick={() => setMobileTab('preview')}
+          className={cn(
+            'flex flex-1 items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium transition-colors',
+            mobileTab === 'preview'
+              ? 'border-primary text-foreground border-b-2'
+              : 'text-muted-foreground'
+          )}
+        >
+          <EyeIcon className="size-3.5" />
+          Preview
+        </button>
+      </div>
+
+      {/* Split pane (desktop) / Tabbed view (mobile) */}
+      <div ref={containerRef} className="flex min-h-0 flex-1 flex-col md:flex-row">
         {/* Editor */}
-        <div className="flex min-h-[300px] flex-1 flex-col md:min-h-0">
+        <div
+          className={cn(
+            'mobile-tab-panel flex min-h-0 flex-col',
+            mobileTab === 'editor' ? 'flex' : 'hidden md:flex'
+          )}
+          style={{ flex: `0 0 ${splitFraction * 100}%` }}
+        >
           <CodeEditor
             ref={editorRef}
             value={markdown}
@@ -131,20 +170,24 @@ export function MarkdownWorkspace() {
           />
         </div>
 
-        {/* Divider */}
-        <div className="bg-border hidden w-px md:block" />
-        <div className="bg-border block h-px md:hidden" />
+        <ResizeHandle onResize={setSplitFraction} containerRef={containerRef} />
 
         {/* Preview */}
-        <div className="min-h-[300px] flex-1 overflow-hidden md:min-h-0">
+        <div
+          className={cn(
+            'mobile-tab-panel min-h-0 overflow-hidden',
+            mobileTab === 'preview' ? 'flex flex-col' : 'hidden md:block'
+          )}
+          style={{ flex: 1 }}
+        >
           <MarkdownPreview ref={previewRef} content={markdown} />
         </div>
       </div>
 
       {/* Stats bar */}
-      <div className="text-muted-foreground flex items-center gap-4 border-t px-4 py-1.5 text-xs">
+      <div className="text-muted-foreground flex items-center gap-3 border-t px-3 py-1.5 text-xs sm:gap-4 sm:px-4">
         <span>{stats.words} words</span>
-        <span>{stats.chars} characters</span>
+        <span className="hidden sm:inline">{stats.chars} characters</span>
         <span>{stats.lines} lines</span>
         <span>{stats.readingTime} min read</span>
       </div>

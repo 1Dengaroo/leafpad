@@ -87,7 +87,7 @@ const toolbarGroups: ToolbarAction[][] = [
 
 export function MarkdownToolbar({ editorRef }: { editorRef: RefObject<CodeEditorHandle | null> }) {
   return (
-    <div className="flex flex-wrap items-center gap-0.5 border-b px-2 py-1.5">
+    <div className="flex items-center gap-0.5 overflow-x-auto px-2 py-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {toolbarGroups.map((group, gi) => (
         <div key={gi} className="flex items-center">
           {gi > 0 && <div className="bg-border mx-1 h-5 w-px" />}

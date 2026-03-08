@@ -9,6 +9,14 @@ export interface EditorTheme {
     border: string;
     placeholder: string;
     readOnlyBg: string;
+    syntax: {
+      key: string;
+      string: string;
+      number: string;
+      boolean: string;
+      null: string;
+      punctuation: string;
+    };
   };
 }
 
@@ -23,7 +31,15 @@ export const editorThemes: EditorTheme[] = [
       gutterText: 'hsl(var(--muted-foreground))',
       border: 'hsl(var(--border))',
       placeholder: 'hsl(var(--muted-foreground) / 0.5)',
-      readOnlyBg: 'hsl(var(--muted) / 0.3)'
+      readOnlyBg: 'hsl(var(--muted) / 0.3)',
+      syntax: {
+        key: '#e05260',
+        string: '#16a34a',
+        number: '#c45e00',
+        boolean: '#0284c7',
+        null: '#9333ea',
+        punctuation: 'hsl(var(--foreground))'
+      }
     }
   },
   {
@@ -36,7 +52,15 @@ export const editorThemes: EditorTheme[] = [
       gutterText: '#a0a0a0',
       border: '#e5e5e5',
       placeholder: '#b0b0b0',
-      readOnlyBg: '#fafafa'
+      readOnlyBg: '#fafafa',
+      syntax: {
+        key: '#b5002a',
+        string: '#186a2e',
+        number: '#1a00b8',
+        boolean: '#0a3d8f',
+        null: '#6a1b8a',
+        punctuation: '#333333'
+      }
     }
   },
   {
@@ -49,7 +73,15 @@ export const editorThemes: EditorTheme[] = [
       gutterText: '#718096',
       border: '#4a5568',
       placeholder: '#718096',
-      readOnlyBg: '#2a3444'
+      readOnlyBg: '#2a3444',
+      syntax: {
+        key: '#ff7b85',
+        string: '#b5e890',
+        number: '#ffcb6b',
+        boolean: '#89ddff',
+        null: '#d8a0f0',
+        punctuation: '#a0b4c8'
+      }
     }
   },
   {
@@ -62,7 +94,15 @@ export const editorThemes: EditorTheme[] = [
       gutterText: '#4a4a4a',
       border: '#1f1f1f',
       placeholder: '#4a4a4a',
-      readOnlyBg: '#0a0a0a'
+      readOnlyBg: '#0a0a0a',
+      syntax: {
+        key: '#ff8a8a',
+        string: '#8aeea0',
+        number: '#ffe066',
+        boolean: '#99d5ff',
+        null: '#e8a0ff',
+        punctuation: '#888888'
+      }
     }
   },
   {
@@ -75,7 +115,15 @@ export const editorThemes: EditorTheme[] = [
       gutterText: '#a09080',
       border: '#d9d0c3',
       placeholder: '#a09080',
-      readOnlyBg: '#f0ebe2'
+      readOnlyBg: '#f0ebe2',
+      syntax: {
+        key: '#8b3a1a',
+        string: '#3d6b1e',
+        number: '#a85c00',
+        boolean: '#1a5c8a',
+        null: '#6a2e6a',
+        punctuation: '#4a3d30'
+      }
     }
   }
 ];

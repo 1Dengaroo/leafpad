@@ -27,12 +27,13 @@ export function AboutDialog() {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>About Leafpad</DialogTitle>
-          <DialogDescription>A clean markdown editor with live preview.</DialogDescription>
+          <DialogDescription>Clean developer tools in one place.</DialogDescription>
         </DialogHeader>
         <div className="text-secondary-foreground space-y-3 text-sm">
           <p>
-            I wanted a markdown editor with a clean interface that stays out of the way. Leafpad is
-            just that, no ads, no distractions, and a clean modern UX.
+            I wanted developer tools with a clean interface that stay out of the way. Leafpad
+            combines a markdown editor, JSON formatter, and JSON diff — no ads, no distractions, and
+            a clean modern UX.
           </p>
           <p className="text-muted-foreground pt-1 text-xs">
             Built by{' '}

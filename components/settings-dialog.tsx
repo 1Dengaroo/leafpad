@@ -21,7 +21,7 @@ import { useSyncExternalStore } from 'react';
 export function SettingsDialog() {
   const { theme, setTheme } = useTheme();
   const { currentFont, setFont } = useFont();
-  const { editorThemeId, setEditorTheme } = useEditorTheme();
+  const { editorThemeId, setEditorTheme, syntaxHighlight, setSyntaxHighlight } = useEditorTheme();
 
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -42,7 +42,7 @@ export function SettingsDialog() {
           <SettingsIcon className="size-[15px]" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-h-[85vh] max-w-md overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>Customize your editor appearance.</DialogDescription>
@@ -108,6 +108,26 @@ export function SettingsDialog() {
                 </button>
               ))}
             </div>
+          </section>
+
+          {/* Syntax Highlighting */}
+          <section>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-medium">Syntax Highlighting</h3>
+              <button
+                onClick={() => setSyntaxHighlight(!syntaxHighlight)}
+                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                  syntaxHighlight ? 'bg-primary' : 'bg-muted'
+                }`}
+              >
+                <span
+                  className={`inline-block size-3.5 rounded-full bg-white transition-transform ${
+                    syntaxHighlight ? 'translate-x-[18px]' : 'translate-x-[3px]'
+                  }`}
+                />
+              </button>
+            </div>
+            <p className="text-muted-foreground mt-1 text-xs">Color JSON tokens in the editor</p>
           </section>
 
           {/* Font */}
