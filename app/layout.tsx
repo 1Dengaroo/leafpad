@@ -23,38 +23,44 @@ const fontVariables = [
 ].join(' ');
 
 export const metadata: Metadata = {
-  title: 'Leafpad | Markdown Editor, JSON Formatter & Diff',
+  title: {
+    default: 'Leafpad | Markdown Editor & Developer Tools',
+    template: '%s | Leafpad'
+  },
   description:
-    'Free, ad-free developer tools. Markdown editor with live preview, JSON formatter & minifier, and JSON diff. No sign-ups, no tracking, no nonsense.',
+    'Free, ad-free developer tools. Markdown editor with live preview, JSON formatter, diff tool, and utilities. No sign-ups, no tracking.',
   keywords: [
     'markdown editor',
     'json formatter',
     'json diff',
+    'text diff',
     'json beautifier',
     'json minifier',
     'developer tools',
     'devtools',
-    'live preview',
-    'markdown tools',
+    'uuid generator',
+    'nanoid',
+    'base64 encoder',
+    'hash generator',
+    'sha256',
     'free markdown editor',
-    'online json formatter',
-    'json compare'
+    'online json formatter'
   ],
   icons: { icon: '/logo.svg' },
   metadataBase: new URL('https://leafpad.vercel.app'),
   openGraph: {
-    title: 'Leafpad | Markdown Editor, JSON Formatter & Diff',
+    title: 'Leafpad | Markdown Editor & Developer Tools',
     description:
-      'Free developer tools: markdown editor, JSON formatter, and JSON diff. No ads, no sign-ups.',
+      'Free developer tools: markdown editor, JSON formatter, diff tool, and utilities. No ads, no sign-ups.',
     url: 'https://leafpad.vercel.app',
     type: 'website',
     siteName: 'Leafpad'
   },
   twitter: {
     card: 'summary',
-    title: 'Leafpad | Markdown Editor, JSON Formatter & Diff',
+    title: 'Leafpad | Markdown Editor & Developer Tools',
     description:
-      'Free developer tools: markdown editor, JSON formatter, and JSON diff. No ads, no sign-ups.'
+      'Free developer tools: markdown editor, JSON formatter, diff tool, and utilities. No ads, no sign-ups.'
   }
 };
 

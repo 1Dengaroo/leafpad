@@ -31,10 +31,27 @@ export function AboutDialog() {
         </DialogHeader>
         <div className="text-secondary-foreground space-y-3 text-sm">
           <p>
-            I wanted developer tools with a clean interface that stay out of the way. Leafpad
-            combines a markdown editor, JSON formatter, and JSON diff — no ads, no distractions, and
-            a clean modern UX.
+            Developer tools with a clean interface that stay out of the way. No ads, no sign-ups, no
+            distractions.
           </p>
+          <ul className="text-muted-foreground space-y-1 text-xs">
+            <li>
+              <span className="text-secondary-foreground font-medium">Markdown</span> - Editor with
+              live preview
+            </li>
+            <li>
+              <span className="text-secondary-foreground font-medium">JSON Formatter</span> -
+              Format, minify &amp; sort keys
+            </li>
+            <li>
+              <span className="text-secondary-foreground font-medium">Diff Tool</span> - Compare
+              JSON or text side-by-side
+            </li>
+            <li>
+              <span className="text-secondary-foreground font-medium">Utilities</span> - UUID,
+              NanoID, Base64 &amp; hashing
+            </li>
+          </ul>
           <p className="text-muted-foreground pt-1 text-xs">
             Built by{' '}
             <a

@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogTrigger
 } from '@/components/ui/dialog';
-import { SettingsIcon, CheckIcon } from 'lucide-react';
+import { SettingsIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useFont } from '@/lib/theme/font-provider';
 import { useEditorTheme } from '@/lib/theme/editor-theme-provider';
@@ -133,21 +133,18 @@ export function SettingsDialog() {
           {/* Font */}
           <section>
             <h3 className="mb-3 text-sm font-medium">Font</h3>
-            <div className="flex flex-col gap-1">
+            <select
+              value={currentFont.id}
+              onChange={(e) => setFont(e.target.value)}
+              className="border-input bg-background text-foreground w-full rounded-lg border px-3 py-2 text-sm outline-none"
+              style={{ fontFamily: `var(${currentFont.variable})` }}
+            >
               {fonts.map((f) => (
-                <button
-                  key={f.id}
-                  onClick={() => setFont(f.id)}
-                  className={`hover:bg-accent/50 flex items-center justify-between rounded-lg border px-3 py-2 text-sm transition-colors ${
-                    f.id === currentFont.id ? 'border-primary ring-primary ring-1' : 'border-border'
-                  }`}
-                  style={{ fontFamily: `var(${f.variable})` }}
-                >
-                  <span>{f.name}</span>
-                  {f.id === currentFont.id && <CheckIcon className="text-primary size-3.5" />}
-                </button>
+                <option key={f.id} value={f.id}>
+                  {f.name}
+                </option>
               ))}
-            </div>
+            </select>
           </section>
         </div>
       </DialogContent>

@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Leafpad - Markdown Editor, JSON Formatter & JSON Diff';
+export const alt = 'Leafpad - Markdown Editor & Developer Tools';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -36,7 +36,7 @@ export default function OGImage() {
           fontWeight: 400
         }}
       >
-        Markdown Editor · JSON Formatter · JSON Diff
+        Markdown · JSON · Diff · Utilities
       </div>
     </div>,
     { ...size }
