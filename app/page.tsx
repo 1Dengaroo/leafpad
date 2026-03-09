@@ -94,7 +94,7 @@ export default function LandingPage() {
 
           {/* Bottom section */}
           <div className="text-muted-foreground mt-12 space-y-4 text-center text-xs">
-            <div className="flex items-center justify-center gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
               <span className="flex items-center gap-1.5">
                 <span className="bg-primary inline-block size-1.5 rounded-full" />
                 No tracking
