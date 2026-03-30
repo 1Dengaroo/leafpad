@@ -32,8 +32,3 @@ export function saveNotes(notes: Note[]): void {
   const data: NotepadStorage = { version: 1, notes };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
-
-export function clearNotes(): void {
-  if (typeof window === 'undefined') return;
-  localStorage.removeItem(STORAGE_KEY);
-}
