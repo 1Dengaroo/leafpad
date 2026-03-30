@@ -30,11 +30,16 @@
  * --accent-primary        Primary accent (links, highlights, brand)
  * --accent-secondary      Secondary accent
  *
- * Shadows
- * -------
- * --shadow-sm             Small shadow
- * --shadow-md             Medium shadow
- * --shadow-lg             Large shadow
+ * Elevation (full box-shadow values)
+ * -----------------------------------
+ * --elevation-sm          Small shadow (buttons, inputs)
+ * --elevation-md          Medium shadow (dropdowns, popovers)
+ * --elevation-lg          Large shadow (dialogs, modals)
+ *
+ * Shape
+ * -----
+ * --radius                Base border radius (feeds --radius-sm/md/lg/xl)
+ * --card-border-width     Card border width (0 = shadow-only elevation)
  *
  * shadcn Bridge Tokens (HSL space-separated values)
  * -------------------------------------------------

@@ -1,0 +1,73 @@
+/* ============================================================
+   Theme: Grove
+   Mood:  Muted sage on cool gray — Scandinavian calm, minimalist
+   ============================================================ */
+
+[data-theme='grove'] {
+  color-scheme: light;
+
+  /* ── Semantic tokens (oklch L C H) ── */
+
+  --accent-primary: 0.5 0.08 165;
+  --accent-secondary: 0.48 0.06 180;
+
+  --surface-primary: 0.97 0.004 210;
+  --surface-secondary: 0.95 0.005 210;
+  --surface-elevated: 0.99 0.002 210;
+  --surface-overlay: 0.2 0.008 210;
+
+  --border-default: 0.87 0.008 200;
+  --border-subtle: 0.92 0.005 200;
+  --border-strong: 0.78 0.01 200;
+
+  --text-primary: 0.2 0.01 180;
+  --text-secondary: 0.4 0.008 180;
+  --text-muted: 0.55 0.006 180;
+  --text-inverse: 0.97 0.004 210;
+
+  /* ── Elevation ── */
+
+  --elevation-sm: 0 1px 2px oklch(0.3 0.01 200 / 0.04);
+  --elevation-md: 0 2px 6px oklch(0.3 0.01 200 / 0.05);
+  --elevation-lg: 0 6px 14px oklch(0.3 0.01 200 / 0.07), 0 2px 4px oklch(0.3 0.01 200 / 0.03);
+
+  /* ── Shape ── */
+
+  --radius: 0.375rem;
+  --card-border-width: 1px;
+
+  /* ── shadcn bridge tokens (HSL) ── */
+
+  --background: 200 10% 97%;
+  --foreground: 180 14% 14%;
+  --card: 200 8% 99%;
+  --card-foreground: 180 14% 14%;
+  --popover: 200 8% 99%;
+  --popover-foreground: 180 14% 14%;
+  --primary: 162 30% 40%;
+  --primary-foreground: 160 20% 97%;
+  --secondary: 180 8% 91%;
+  --secondary-foreground: 180 12% 18%;
+  --muted: 200 6% 93%;
+  --muted-foreground: 180 6% 44%;
+  --accent: 180 8% 93%;
+  --accent-foreground: 180 14% 14%;
+  --destructive: 0 60% 50%;
+  --destructive-foreground: 200 20% 98%;
+  --border: 200 8% 86%;
+  --input: 200 8% 84%;
+  --ring: 162 30% 40%;
+  --chart-1: 162 28% 38%;
+  --chart-2: 178 24% 42%;
+  --chart-3: 148 22% 44%;
+  --chart-4: 192 28% 46%;
+  --chart-5: 135 20% 40%;
+  --sidebar-background: 200 8% 96%;
+  --sidebar-foreground: 180 6% 42%;
+  --sidebar-primary: 162 30% 36%;
+  --sidebar-primary-foreground: 160 20% 97%;
+  --sidebar-accent: 180 8% 92%;
+  --sidebar-accent-foreground: 180 14% 14%;
+  --sidebar-border: 200 8% 84%;
+  --sidebar-ring: 162 30% 36%;
+}

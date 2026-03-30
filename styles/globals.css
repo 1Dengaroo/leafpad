@@ -1,14 +1,14 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@import './themes/manuscript.css';
-@import './themes/campfire.css';
-@import './themes/overcast.css';
-@import './themes/nightfall.css';
-@import './themes/ember.css';
-@import './themes/inkwell.css';
+@import './themes/meadow.css';
+@import './themes/canopy.css';
+@import './themes/grove.css';
+@import './themes/moss.css';
+@import './themes/fern.css';
+@import './themes/thicket.css';
 
-@custom-variant dark (&:is([data-theme="nightfall"] *, [data-theme="ember"] *, [data-theme="inkwell"] *));
+@custom-variant dark (&:is([data-theme="canopy"] *, [data-theme="moss"] *, [data-theme="thicket"] *));
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -47,6 +47,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
 }
 
 @layer base {
@@ -56,6 +59,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  [data-slot="card"] {
+    border-width: var(--card-border-width, 1px);
   }
 }
 
