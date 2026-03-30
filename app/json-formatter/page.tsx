@@ -25,8 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Free JSON Formatter, Beautifier & Minifier | Leafpad',
-    description:
-      'Format, beautify, minify, and sort JSON online. Free and ad-free.'
+    description: 'Format, beautify, minify, and sort JSON online. Free and ad-free.'
   },
   alternates: {
     canonical: '/json-formatter'

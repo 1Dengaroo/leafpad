@@ -78,11 +78,7 @@ export function ToolSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="gap-1.5 px-2 text-sm font-medium"
-        >
+        <Button variant="ghost" size="sm" className="gap-1.5 px-2 text-sm font-medium">
           {active && <span className="text-muted-foreground">{active.icon}</span>}
           <span>{active?.label ?? 'Select Tool...'}</span>
           <ChevronDownIcon className="text-muted-foreground size-3.5" />

@@ -5,5 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default function OGImage() {
-  return generateOgImage('Markdown Editor', 'Live preview, formatting toolbar, and export to .md or .html');
+  return generateOgImage(
+    'Markdown Editor',
+    'Live preview, formatting toolbar, and export to .md or .html'
+  );
 }

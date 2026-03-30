@@ -161,9 +161,9 @@ function NoteCard({
   return (
     <Card
       className={cn(
-        'group relative border-l-[3px] border-l-primary transition-colors',
+        'group border-l-primary relative border-l-[3px] transition-colors',
         isSelecting && 'cursor-pointer',
-        isSelected && 'bg-primary/5 ring-1 ring-primary/20'
+        isSelected && 'bg-primary/5 ring-primary/20 ring-1'
       )}
       onClick={isSelecting ? onToggleSelect : undefined}
     >
@@ -231,9 +231,7 @@ function NoteCard({
       </CardContent>
 
       <CardFooter className="px-4 pt-3 pb-3">
-        <p className="text-muted-foreground text-[11px]">
-          {formatTime(note.updatedAt)}
-        </p>
+        <p className="text-muted-foreground text-[11px]">{formatTime(note.updatedAt)}</p>
       </CardFooter>
     </Card>
   );
@@ -357,10 +355,7 @@ export function Notepad() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 {COLUMN_OPTIONS.map((opt) => (
-                  <DropdownMenuItem
-                    key={opt.value}
-                    onClick={() => setColumnCount(opt.value)}
-                  >
+                  <DropdownMenuItem key={opt.value} onClick={() => setColumnCount(opt.value)}>
                     {columns === opt.value && <CheckSquare2Icon className="size-3.5" />}
                     {columns !== opt.value && <SquareIcon className="size-3.5" />}
                     {opt.label}
@@ -378,10 +373,7 @@ export function Notepad() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                <DropdownMenuItem
-                  disabled={notes.length < 2}
-                  onClick={() => setSelecting(true)}
-                >
+                <DropdownMenuItem disabled={notes.length < 2} onClick={() => setSelecting(true)}>
                   <ListChecksIcon className="size-3.5" />
                   Select notes
                 </DropdownMenuItem>
@@ -399,7 +391,9 @@ export function Notepad() {
 
             <span className="text-muted-foreground ml-auto text-xs tabular-nums">
               {hydrated && notes.length > 0 && (
-                <>{notes.length} {notes.length === 1 ? 'note' : 'notes'}</>
+                <>
+                  {notes.length} {notes.length === 1 ? 'note' : 'notes'}
+                </>
               )}
             </span>
           </>
@@ -426,7 +420,7 @@ export function Notepad() {
           </div>
         )}
 
-        <div className={cn('grid gap-3 auto-rows-min', gridClasses[columns])}>
+        <div className={cn('grid auto-rows-min gap-3', gridClasses[columns])}>
           <AnimatePresence initial={false} mode="popLayout">
             {notes.map((note) => (
               <motion.div
@@ -465,9 +459,9 @@ export function Notepad() {
         <button
           onClick={handleNewNote}
           className={cn(
-            'fixed bottom-6 right-6 z-10 flex size-14 items-center justify-center rounded-full shadow-lg transition-all sm:hidden',
+            'fixed right-6 bottom-6 z-10 flex size-14 items-center justify-center rounded-full shadow-lg transition-all sm:hidden',
             'bg-primary text-primary-foreground',
-            'active:scale-95 hover:shadow-xl'
+            'hover:shadow-xl active:scale-95'
           )}
           aria-label="New note"
         >
@@ -476,7 +470,10 @@ export function Notepad() {
       )}
 
       {/* Alert: delete single note */}
-      <AlertDialog open={!!singleDeleteId} onOpenChange={(open) => !open && setSingleDeleteId(null)}>
+      <AlertDialog
+        open={!!singleDeleteId}
+        onOpenChange={(open) => !open && setSingleDeleteId(null)}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete note?</AlertDialogTitle>
@@ -487,7 +484,7 @@ export function Notepad() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              className="bg-destructive text-white hover:bg-destructive/90"
+              className="bg-destructive hover:bg-destructive/90 text-white"
               onClick={handleConfirmSingleDelete}
             >
               Delete
@@ -500,7 +497,9 @@ export function Notepad() {
       <AlertDialog open={deleteSelectedDialogOpen} onOpenChange={setDeleteSelectedDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete {selected.size} {selected.size === 1 ? 'note' : 'notes'}?</AlertDialogTitle>
+            <AlertDialogTitle>
+              Delete {selected.size} {selected.size === 1 ? 'note' : 'notes'}?
+            </AlertDialogTitle>
             <AlertDialogDescription>
               {selected.size === 1
                 ? 'This note will be permanently deleted.'
@@ -511,7 +510,7 @@ export function Notepad() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              className="bg-destructive text-white hover:bg-destructive/90"
+              className="bg-destructive hover:bg-destructive/90 text-white"
               onClick={handleDeleteSelected}
             >
               Delete {selected.size} {selected.size === 1 ? 'note' : 'notes'}
@@ -526,14 +525,14 @@ export function Notepad() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete all notes?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete {notes.length}{' '}
-              {notes.length === 1 ? 'note' : 'notes'}. This can&apos;t be undone.
+              This will permanently delete {notes.length} {notes.length === 1 ? 'note' : 'notes'}.
+              This can&apos;t be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              className="bg-destructive text-white hover:bg-destructive/90"
+              className="bg-destructive hover:bg-destructive/90 text-white"
               onClick={() => {
                 deleteAll();
                 setClearDialogOpen(false);

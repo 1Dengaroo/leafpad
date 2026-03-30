@@ -26,8 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Free Notepad for Developers | Leafpad',
-    description:
-      'Quick sticky notes saved locally in your browser. Free and ad-free.'
+    description: 'Quick sticky notes saved locally in your browser. Free and ad-free.'
   },
   alternates: {
     canonical: '/notepad'

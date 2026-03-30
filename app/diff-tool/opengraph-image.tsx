@@ -5,5 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default function OGImage() {
-  return generateOgImage('Diff Tool', 'Compare JSON or text side-by-side with word-level change detection');
+  return generateOgImage(
+    'Diff Tool',
+    'Compare JSON or text side-by-side with word-level change detection'
+  );
 }
