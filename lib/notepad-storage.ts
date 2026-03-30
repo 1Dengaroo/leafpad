@@ -2,6 +2,7 @@ const STORAGE_KEY = 'leafpad:notepad:notes';
 
 export interface Note {
   id: string;
+  title: string;
   text: string;
   createdAt: number;
   updatedAt: number;
@@ -18,7 +19,8 @@ export function loadNotes(): Note[] {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const data: NotepadStorage = JSON.parse(raw);
-    if (data.version === 1 && Array.isArray(data.notes)) return data.notes;
+    if (data.version === 1 && Array.isArray(data.notes))
+      return data.notes.map((n) => ({ ...n, title: n.title ?? '' }));
     return [];
   } catch {
     return [];

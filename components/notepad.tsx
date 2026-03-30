@@ -5,18 +5,27 @@ import {
   PlusIcon,
   Trash2Icon,
   TrashIcon,
-  Columns2Icon,
-  Columns3Icon,
-  Columns4Icon,
+  LayoutGridIcon,
   SquareIcon,
   CheckSquare2Icon,
-  CheckIcon,
-  XIcon
+  ListChecksIcon,
+  XIcon,
+  EllipsisVerticalIcon
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,8 +36,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from '@/components/ui/alert-dialog';
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-import { type Note, loadNotes, saveNotes, clearNotes } from '@/lib/notepad-storage';
+import { type Note, loadNotes, saveNotes } from '@/lib/notepad-storage';
 
 // ── Helpers ────────────────────────────────────────────────────
 
@@ -49,18 +57,18 @@ const COLUMNS_KEY = 'leafpad:notepad:columns';
 
 type ColumnCount = 1 | 2 | 3 | 4;
 
-const columnIcons: Record<ColumnCount, React.ReactNode> = {
-  1: <SquareIcon className="size-3.5" />,
-  2: <Columns2Icon className="size-3.5" />,
-  3: <Columns3Icon className="size-3.5" />,
-  4: <Columns4Icon className="size-3.5" />
-};
+const COLUMN_OPTIONS: { value: ColumnCount; label: string }[] = [
+  { value: 1, label: '1 column' },
+  { value: 2, label: '2 columns' },
+  { value: 3, label: '3 columns' },
+  { value: 4, label: '4 columns' }
+];
 
-const columnClasses: Record<ColumnCount, string> = {
-  1: 'columns-1',
-  2: 'columns-1 sm:columns-2',
-  3: 'columns-1 sm:columns-2 lg:columns-3',
-  4: 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4'
+const gridClasses: Record<ColumnCount, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
 };
 
 // ── useNotes hook ──────────────────────────────────────────────
@@ -81,6 +89,7 @@ function useNotes() {
   const addNote = useCallback(() => {
     const note: Note = {
       id: crypto.randomUUID(),
+      title: '',
       text: '',
       createdAt: Date.now(),
       updatedAt: Date.now()
@@ -89,9 +98,9 @@ function useNotes() {
     return note.id;
   }, []);
 
-  const updateNote = useCallback((id: string, text: string) => {
+  const updateNote = useCallback((id: string, fields: Partial<Pick<Note, 'title' | 'text'>>) => {
     setNotes((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, text, updatedAt: Date.now() } : n))
+      prev.map((n) => (n.id === id ? { ...n, ...fields, updatedAt: Date.now() } : n))
     );
   }, []);
 
@@ -105,7 +114,6 @@ function useNotes() {
 
   const deleteAll = useCallback(() => {
     setNotes([]);
-    clearNotes();
   }, []);
 
   return { notes, hydrated, addNote, updateNote, deleteNote, deleteNotes, deleteAll };
@@ -115,88 +123,53 @@ function useNotes() {
 
 function NoteCard({
   note,
-  isEditing,
+  isNew,
   isSelecting,
   isSelected,
-  onStartEdit,
-  onFinishEdit,
+  onChange,
   onDelete,
   onToggleSelect
 }: {
   note: Note;
-  isEditing: boolean;
+  isNew: boolean;
   isSelecting: boolean;
   isSelected: boolean;
-  onStartEdit: () => void;
-  onFinishEdit: (text: string) => void;
+  onChange: (fields: Partial<Pick<Note, 'title' | 'text'>>) => void;
   onDelete: () => void;
   onToggleSelect: () => void;
 }) {
+  const titleRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [draft, setDraft] = useState(note.text);
-  const prevTextRef = useRef(note.text);
 
   useEffect(() => {
-    if (isEditing && textareaRef.current) {
-      const ta = textareaRef.current;
-      ta.focus();
-      ta.selectionStart = ta.value.length;
-      ta.selectionEnd = ta.value.length;
-      resizeTextarea(ta);
+    if (isNew && titleRef.current) {
+      titleRef.current.focus();
     }
-  }, [isEditing]);
-
-  useEffect(() => {
-    if (!isEditing) {
-      setDraft(note.text);
-      prevTextRef.current = note.text;
-    }
-  }, [note.text, isEditing]);
+  }, [isNew]);
 
   function resizeTextarea(el: HTMLTextAreaElement) {
     el.style.height = 'auto';
     el.style.height = el.scrollHeight + 'px';
   }
 
-  function handleBlur() {
-    const trimmed = draft.trim();
-    onFinishEdit(trimmed);
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      textareaRef.current?.blur();
+  useEffect(() => {
+    if (textareaRef.current) {
+      resizeTextarea(textareaRef.current);
     }
-    if (e.key === 'Escape') {
-      setDraft(prevTextRef.current);
-      setTimeout(() => textareaRef.current?.blur(), 0);
-    }
-  }
-
-  function handleClick() {
-    if (isSelecting) {
-      onToggleSelect();
-    } else if (!isEditing) {
-      onStartEdit();
-    }
-  }
+  }, []);
 
   return (
     <Card
       className={cn(
-        'group relative break-inside-avoid transition-colors min-h-[7rem] border-l-[3px] border-l-primary',
-        !isEditing && !isSelecting && 'active:bg-accent/50 cursor-pointer',
-        isEditing && 'ring-1 ring-primary/10',
+        'group relative border-l-[3px] border-l-primary transition-colors',
         isSelecting && 'cursor-pointer',
         isSelected && 'bg-primary/5 ring-1 ring-primary/20'
       )}
-      onClick={handleClick}
+      onClick={isSelecting ? onToggleSelect : undefined}
     >
       <CardContent className="relative px-4 pt-4 pb-0">
-        {/* Selection checkbox */}
         {isSelecting && (
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-3 right-3 z-10">
             {isSelected ? (
               <CheckSquare2Icon className="text-primary size-4" />
             ) : (
@@ -205,7 +178,6 @@ function NoteCard({
           </div>
         )}
 
-        {/* Delete button — only in normal mode */}
         {!isSelecting && (
           <button
             onClick={(e) => {
@@ -213,7 +185,7 @@ function NoteCard({
               onDelete();
             }}
             className={cn(
-              'absolute top-3 right-3 flex size-7 items-center justify-center rounded-md transition-all',
+              'absolute top-3 right-3 z-10 flex size-7 items-center justify-center rounded-md transition-all',
               'text-muted-foreground hover:text-destructive hover:bg-destructive/10',
               'sm:opacity-0 sm:group-hover:opacity-100'
             )}
@@ -223,38 +195,33 @@ function NoteCard({
           </button>
         )}
 
-        {isEditing ? (
-          <textarea
+        <div className="flex flex-col gap-2 pr-6">
+          <Input
+            ref={titleRef}
+            value={note.title}
+            onChange={(e) => onChange({ title: e.target.value })}
+            placeholder="Title"
+            disabled={isSelecting}
+            className="h-auto border-none px-0 py-0 text-sm font-semibold shadow-none focus-visible:ring-0"
+            style={{ userSelect: 'text' }}
+          />
+          <Textarea
             ref={textareaRef}
-            value={draft}
+            value={note.text}
             onChange={(e) => {
-              setDraft(e.target.value);
+              onChange({ text: e.target.value });
               resizeTextarea(e.target);
             }}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-            placeholder="Type your note..."
-            rows={3}
+            placeholder="Description"
+            disabled={isSelecting}
+            rows={2}
             className={cn(
-              'w-full resize-none bg-transparent leading-relaxed outline-none',
-              'placeholder:text-muted-foreground/60',
-              'pr-6',
+              'min-h-0 resize-none border-none px-0 py-0 shadow-none focus-visible:ring-0',
               'text-[16px] sm:text-sm'
             )}
             style={{ userSelect: 'text' }}
           />
-        ) : (
-          <div className="pr-6">
-            <p
-              className="whitespace-pre-wrap text-sm leading-relaxed"
-              style={{ userSelect: 'text' }}
-            >
-              {note.text || (
-                <span className="text-muted-foreground italic">Empty note</span>
-              )}
-            </p>
-          </div>
-        )}
+        </div>
       </CardContent>
 
       <CardFooter className="px-4 pt-3 pb-3">
@@ -270,7 +237,7 @@ function NoteCard({
 
 export function Notepad() {
   const { notes, hydrated, addNote, updateNote, deleteNote, deleteNotes, deleteAll } = useNotes();
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [newestId, setNewestId] = useState<string | null>(null);
   const [clearDialogOpen, setClearDialogOpen] = useState(false);
   const [deleteSelectedDialogOpen, setDeleteSelectedDialogOpen] = useState(false);
   const [singleDeleteId, setSingleDeleteId] = useState<string | null>(null);
@@ -278,7 +245,6 @@ export function Notepad() {
   const [selecting, setSelecting] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
-  // Load saved column preference
   useEffect(() => {
     const saved = localStorage.getItem(COLUMNS_KEY);
     if (saved) {
@@ -287,25 +253,15 @@ export function Notepad() {
     }
   }, []);
 
-  function cycleColumns() {
-    const next = (columns === 4 ? 1 : columns + 1) as ColumnCount;
-    setColumns(next);
-    localStorage.setItem(COLUMNS_KEY, String(next));
+  function setColumnCount(value: ColumnCount) {
+    setColumns(value);
+    localStorage.setItem(COLUMNS_KEY, String(value));
   }
 
   function handleNewNote() {
     if (selecting) return;
     const id = addNote();
-    setEditingId(id);
-  }
-
-  function handleFinishEdit(id: string, text: string) {
-    if (text === '') {
-      deleteNote(id);
-    } else {
-      updateNote(id, text);
-    }
-    setEditingId(null);
+    setNewestId(id);
   }
 
   function toggleSelect(id: string) {
@@ -331,7 +287,6 @@ export function Notepad() {
 
   function handleConfirmSingleDelete() {
     if (singleDeleteId) {
-      if (editingId === singleDeleteId) setEditingId(null);
       deleteNote(singleDeleteId);
       setSingleDeleteId(null);
       toast.success('Note deleted');
@@ -340,130 +295,162 @@ export function Notepad() {
 
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden">
-      {/* Header bar */}
-      <div className="flex items-center justify-between border-b px-4 py-2.5">
-        <p className="text-muted-foreground text-xs tabular-nums">
-          {hydrated && notes.length > 0 && (
-            <>
-              {selecting && selected.size > 0
-                ? `${selected.size} selected`
-                : `${notes.length} ${notes.length === 1 ? 'note' : 'notes'}`}
-            </>
-          )}
-        </p>
-        <div className="flex items-center gap-1">
-          {selecting ? (
-            <>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="gap-1.5"
-                onClick={() => {
-                  if (selected.size === notes.length) {
-                    setSelected(new Set());
-                  } else {
-                    setSelected(new Set(notes.map((n) => n.id)));
-                  }
-                }}
-              >
-                <CheckSquare2Icon className="size-3.5" />
-                <span className="hidden sm:inline">
-                  {selected.size === notes.length ? 'Deselect all' : 'Select all'}
-                </span>
-              </Button>
-              {selected.size > 0 && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive gap-1.5 hover:text-destructive"
-                  onClick={() => setDeleteSelectedDialogOpen(true)}
-                >
-                  <TrashIcon className="size-3.5" />
-                  <span className="hidden sm:inline">Delete</span>
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center gap-2 border-b px-3 py-2 sm:px-4">
+        {selecting ? (
+          <>
+            <Button size="sm" variant="outline" className="gap-1.5" onClick={exitSelecting}>
+              <XIcon className="size-3.5" />
+              Done
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5"
+              onClick={() => {
+                if (selected.size === notes.length) {
+                  setSelected(new Set());
+                } else {
+                  setSelected(new Set(notes.map((n) => n.id)));
+                }
+              }}
+            >
+              <CheckSquare2Icon className="size-3.5" />
+              <span className="hidden sm:inline">
+                {selected.size === notes.length ? 'Deselect all' : 'Select all'}
+              </span>
+            </Button>
+            <Button
+              size="sm"
+              variant="destructive"
+              className="gap-1.5"
+              disabled={selected.size === 0}
+              onClick={() => setDeleteSelectedDialogOpen(true)}
+            >
+              <TrashIcon className="size-3.5" />
+              Delete{selected.size > 0 && ` (${selected.size})`}
+            </Button>
+            <span className="text-muted-foreground ml-auto text-xs tabular-nums">
+              {selected.size} of {notes.length} selected
+            </span>
+          </>
+        ) : (
+          <>
+            <Button size="sm" onClick={handleNewNote} className="gap-1.5">
+              <PlusIcon className="size-3.5" />
+              New note
+            </Button>
+
+            {/* Layout dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" variant="outline" className="gap-1.5">
+                  <LayoutGridIcon className="size-3.5" />
+                  <span className="hidden sm:inline">Layout</span>
                 </Button>
-              )}
-              <Button variant="ghost" size="sm" className="gap-1.5" onClick={exitSelecting}>
-                <XIcon className="size-3.5" />
-                <span className="hidden sm:inline">Cancel</span>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon-sm" onClick={cycleColumns}>
-                    {columnIcons[columns]}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>{columns} {columns === 1 ? 'column' : 'columns'}</TooltipContent>
-              </Tooltip>
-              {notes.length > 1 && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => {
-                        setSelecting(true);
-                        setEditingId(null);
-                      }}
-                    >
-                      <CheckIcon className="size-3.5" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Select notes</TooltipContent>
-                </Tooltip>
-              )}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden gap-1.5 sm:inline-flex"
-                onClick={handleNewNote}
-              >
-                <PlusIcon className="size-3.5" />
-                New note
-              </Button>
-              {notes.length > 0 && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-muted-foreground gap-1.5 hover:text-destructive"
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {COLUMN_OPTIONS.map((opt) => (
+                  <DropdownMenuItem
+                    key={opt.value}
+                    onClick={() => setColumnCount(opt.value)}
+                  >
+                    {columns === opt.value && <CheckSquare2Icon className="size-3.5" />}
+                    {columns !== opt.value && <SquareIcon className="size-3.5" />}
+                    {opt.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* More menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" variant="outline" className="gap-1.5">
+                  <EllipsisVerticalIcon className="size-3.5" />
+                  <span className="hidden sm:inline">More</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem
+                  disabled={notes.length < 2}
+                  onClick={() => setSelecting(true)}
+                >
+                  <ListChecksIcon className="size-3.5" />
+                  Select notes
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  disabled={notes.length === 0}
+                  className="text-destructive focus:text-destructive"
                   onClick={() => setClearDialogOpen(true)}
                 >
                   <TrashIcon className="size-3.5" />
-                  <span className="hidden sm:inline">Clear all</span>
-                </Button>
+                  Delete all notes
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <span className="text-muted-foreground ml-auto text-xs tabular-nums">
+              {hydrated && notes.length > 0 && (
+                <>{notes.length} {notes.length === 1 ? 'note' : 'notes'}</>
               )}
-            </>
-          )}
-        </div>
+            </span>
+          </>
+        )}
       </div>
 
-      {/* Note list */}
+      {/* Note grid */}
       <div className="flex-1 overflow-y-auto p-4 pb-24 sm:pb-4">
         {hydrated && notes.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="text-muted-foreground/60 text-sm">No notes yet</p>
-            <p className="text-muted-foreground/40 mt-1 text-xs">
-              Tap <span className="text-primary font-medium">+</span> to jot something down
-            </p>
+          <div className="flex flex-col items-center justify-center gap-4 py-24">
+            <div className="bg-muted flex size-12 items-center justify-center rounded-full">
+              <PlusIcon className="text-muted-foreground size-5" />
+            </div>
+            <div className="text-center">
+              <p className="text-foreground text-sm font-medium">No notes yet</p>
+              <p className="text-muted-foreground mt-1 max-w-[200px] text-xs leading-relaxed">
+                Create your first note to start jotting things down.
+              </p>
+            </div>
+            <Button size="sm" onClick={handleNewNote} className="gap-1.5">
+              <PlusIcon className="size-3.5" />
+              New note
+            </Button>
           </div>
         )}
 
-        <div className={cn(columnClasses[columns], 'gap-3 [&>*]:mb-3')}>
-          {notes.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              isEditing={!selecting && editingId === note.id}
-              isSelecting={selecting}
-              isSelected={selected.has(note.id)}
-              onStartEdit={() => setEditingId(note.id)}
-              onFinishEdit={(text) => handleFinishEdit(note.id, text)}
-              onDelete={() => setSingleDeleteId(note.id)}
-              onToggleSelect={() => toggleSelect(note.id)}
-            />
-          ))}
+        <div className={cn('grid gap-3 auto-rows-min', gridClasses[columns])}>
+          <AnimatePresence initial={false} mode="popLayout">
+            {notes.map((note) => (
+              <motion.div
+                key={note.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95, y: -8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{
+                  layout: { type: 'spring', stiffness: 500, damping: 35 },
+                  opacity: { duration: 0.2 },
+                  scale: { duration: 0.2 },
+                  y: { duration: 0.25 }
+                }}
+              >
+                <NoteCard
+                  note={note}
+                  isNew={newestId === note.id}
+                  isSelecting={selecting}
+                  isSelected={selected.has(note.id)}
+                  onChange={(fields) => {
+                    updateNote(note.id, fields);
+                    if (newestId === note.id) setNewestId(null);
+                  }}
+                  onDelete={() => setSingleDeleteId(note.id)}
+                  onToggleSelect={() => toggleSelect(note.id)}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
 
@@ -544,7 +531,6 @@ export function Notepad() {
               onClick={() => {
                 deleteAll();
                 setClearDialogOpen(false);
-                setEditingId(null);
                 exitSelecting();
                 toast.success('All notes deleted');
               }}
