@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | Leafpad'
   },
   description:
-    'Free, ad-free developer tools. JSON formatter, markdown editor, diff tool, and utilities like UUID generator, Base64 encoder, and SHA-256 hashing. No sign-ups, no tracking.',
+    'Free, ad-free developer tools. JSON formatter, markdown editor, diff tool, notepad, and utilities like UUID generator, Base64 encoder, and SHA-256 hashing. No sign-ups, no tracking.',
   keywords: [
     'developer tools',
     'devtools',
@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     'hash generator',
     'sha256',
     'sha512',
+    'notepad',
+    'sticky notes',
+    'quick notes',
+    'developer notepad',
     'free developer tools',
     'online developer tools'
   ],

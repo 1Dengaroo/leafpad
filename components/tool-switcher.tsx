@@ -17,10 +17,11 @@ import {
   PencilLineIcon,
   BracesIcon,
   GitCompareArrowsIcon,
-  WrenchIcon
+  WrenchIcon,
+  StickyNoteIcon
 } from 'lucide-react';
 
-export type Tool = 'markdown' | 'json-formatter' | 'diff-tool' | 'utilities';
+export type Tool = 'markdown' | 'json-formatter' | 'diff-tool' | 'utilities' | 'notepad';
 
 const tools: {
   id: Tool;
@@ -56,6 +57,13 @@ const tools: {
     label: 'Utilities',
     description: 'UUID, NanoID & Base64',
     icon: <WrenchIcon className="size-4" />
+  },
+  {
+    id: 'notepad',
+    href: '/notepad',
+    label: 'Notepad',
+    description: 'Quick notes & snippets',
+    icon: <StickyNoteIcon className="size-4" />
   }
 ];
 
