@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { HomeIcon } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: '404 - Page Not Found',
+  description: 'The page you are looking for could not be found. Return to Leafpad developer tools.',
+  robots: { index: false, follow: true }
+};
 
 export default function NotFound() {
   return (

@@ -3,18 +3,30 @@ import { ToolPage } from '@/components/tool-page';
 import { JsonFormatter } from '@/components/json-formatter';
 
 export const metadata: Metadata = {
-  title: 'JSON Formatter & Minifier | Leafpad',
+  title: 'Free JSON Formatter, Beautifier & Minifier',
   description:
-    'Format, minify, and sort JSON online. Free, ad-free JSON beautifier with configurable indentation. No sign-ups.',
+    'Format, beautify, minify, and sort JSON keys online with configurable indentation. Validate JSON syntax instantly. Free, ad-free, no sign-ups required.',
+  keywords: [
+    'json formatter',
+    'json beautifier',
+    'json minifier',
+    'json validator',
+    'online json formatter',
+    'free json formatter',
+    'json pretty print',
+    'json sort keys'
+  ],
   openGraph: {
-    title: 'JSON Formatter & Minifier | Leafpad',
-    description: 'Format, minify, and sort JSON online. Free and ad-free.',
+    title: 'Free JSON Formatter, Beautifier & Minifier | Leafpad',
+    description:
+      'Format, beautify, minify, and sort JSON online. Configurable indentation and instant validation. Free and ad-free.',
     url: 'https://leafpad.vercel.app/json-formatter'
   },
   twitter: {
-    card: 'summary',
-    title: 'JSON Formatter & Minifier | Leafpad',
-    description: 'Format, minify, and sort JSON online. Free and ad-free.'
+    card: 'summary_large_image',
+    title: 'Free JSON Formatter, Beautifier & Minifier | Leafpad',
+    description:
+      'Format, beautify, minify, and sort JSON online. Free and ad-free.'
   },
   alternates: {
     canonical: '/json-formatter'

@@ -36,7 +36,7 @@ export default function OGImage() {
           fontWeight: 400
         }}
       >
-        Markdown · JSON · Diff · Utilities
+        Markdown · JSON · Diff · Notepad · Utilities
       </div>
     </div>,
     { ...size }

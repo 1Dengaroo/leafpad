@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/lib/theme/theme-provider';
 import { FontProvider } from '@/lib/theme/font-provider';
 import { EditorThemeProvider } from '@/lib/theme/editor-theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { JsonLd, websiteSchema } from '@/lib/structured-data';
 
 const sora = Sora({ subsets: ['latin'], variable: '--font-sora' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' });
@@ -60,16 +61,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Leafpad | Free Developer Tools',
     description:
-      'Free developer tools: JSON formatter, markdown editor, diff tool, and utilities. No ads, no sign-ups.',
+      'Free developer tools: JSON formatter, markdown editor, diff tool, notepad, and utilities. No ads, no sign-ups.',
     url: 'https://leafpad.vercel.app',
     type: 'website',
     siteName: 'Leafpad'
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Leafpad | Free Developer Tools',
     description:
-      'Free developer tools: JSON formatter, markdown editor, diff tool, and utilities. No ads, no sign-ups.'
+      'Free developer tools: JSON formatter, markdown editor, diff tool, notepad, and utilities. No ads, no sign-ups.'
   }
 };
 
@@ -80,6 +81,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <JsonLd data={websiteSchema} />
+      </head>
       <body className={`${fontVariables} antialiased`} style={{ fontFamily: 'var(--font-sora)' }}>
         <ThemeProvider>
           <FontProvider>
