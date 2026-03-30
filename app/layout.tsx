@@ -24,43 +24,48 @@ const fontVariables = [
 
 export const metadata: Metadata = {
   title: {
-    default: 'Leafpad | Markdown Editor & Developer Tools',
+    default: 'Leafpad | Free Developer Tools',
     template: '%s | Leafpad'
   },
   description:
-    'Free, ad-free developer tools. Markdown editor with live preview, JSON formatter, diff tool, and utilities. No sign-ups, no tracking.',
+    'Free, ad-free developer tools. JSON formatter, markdown editor, diff tool, and utilities like UUID generator, Base64 encoder, and SHA-256 hashing. No sign-ups, no tracking.',
   keywords: [
-    'markdown editor',
-    'json formatter',
-    'json diff',
-    'text diff',
-    'json beautifier',
-    'json minifier',
     'developer tools',
     'devtools',
+    'json formatter',
+    'json beautifier',
+    'json minifier',
+    'online json formatter',
+    'markdown editor',
+    'free markdown editor',
+    'json diff',
+    'text diff',
+    'diff tool',
     'uuid generator',
-    'nanoid',
+    'nanoid generator',
     'base64 encoder',
+    'base64 decoder',
     'hash generator',
     'sha256',
-    'free markdown editor',
-    'online json formatter'
+    'sha512',
+    'free developer tools',
+    'online developer tools'
   ],
   icons: { icon: '/logo.svg' },
   metadataBase: new URL('https://leafpad.vercel.app'),
   openGraph: {
-    title: 'Leafpad | Markdown Editor & Developer Tools',
+    title: 'Leafpad | Free Developer Tools',
     description:
-      'Free developer tools: markdown editor, JSON formatter, diff tool, and utilities. No ads, no sign-ups.',
+      'Free developer tools: JSON formatter, markdown editor, diff tool, and utilities. No ads, no sign-ups.',
     url: 'https://leafpad.vercel.app',
     type: 'website',
     siteName: 'Leafpad'
   },
   twitter: {
     card: 'summary',
-    title: 'Leafpad | Markdown Editor & Developer Tools',
+    title: 'Leafpad | Free Developer Tools',
     description:
-      'Free developer tools: markdown editor, JSON formatter, diff tool, and utilities. No ads, no sign-ups.'
+      'Free developer tools: JSON formatter, markdown editor, diff tool, and utilities. No ads, no sign-ups.'
   }
 };
 
