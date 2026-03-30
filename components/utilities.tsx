@@ -3,6 +3,9 @@
 import { useState, useCallback, useMemo } from 'react';
 
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useEditorTheme } from '@/lib/theme/editor-theme-provider';
 import {
   RefreshCwIcon,
@@ -132,7 +135,7 @@ function InfoTooltip({ text }: { text: string }) {
   );
 }
 
-function Card({
+function UtilityCard({
   icon,
   title,
   info,
@@ -144,14 +147,14 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-card rounded-xl border p-4 sm:p-5">
-      <div className="mb-4 flex items-center gap-2.5">
+    <Card>
+      <CardHeader className="flex-row items-center gap-2.5 space-y-0">
         <span className="text-primary">{icon}</span>
-        <h3 className="text-sm font-semibold tracking-tight">{title}</h3>
+        <CardTitle className="text-sm tracking-tight">{title}</CardTitle>
         <InfoTooltip text={info} />
-      </div>
-      {children}
-    </div>
+      </CardHeader>
+      <CardContent>{children}</CardContent>
+    </Card>
   );
 }
 
@@ -198,7 +201,7 @@ function UUIDGenerator() {
   const [value, setValue] = useState('');
 
   return (
-    <Card
+    <UtilityCard
       icon={<FingerprintIcon className="size-4" />}
       title="UUID v4"
       info="Universally Unique Identifier v4. 128-bit random ID with 122 bits of entropy. Standard format: 8-4-4-4-12 hex characters. Collision probability is negligible (~1 in 2.7 quintillion)."
@@ -227,7 +230,7 @@ function UUIDGenerator() {
           <TooltipContent side="top">Generate</TooltipContent>
         </Tooltip>
       </div>
-    </Card>
+    </UtilityCard>
   );
 }
 
@@ -243,7 +246,7 @@ function NanoIDGenerator() {
   const entropy = length * 6;
 
   return (
-    <Card
+    <UtilityCard
       icon={<SparklesIcon className="size-4" />}
       title="Nano ID"
       info="Compact URL-safe unique ID using a 64-character alphabet (A-Z, a-z, 0-9, -, _). Each character provides 6 bits of entropy. Default length of 21 gives 126 bits, comparable to UUID v4."
@@ -276,14 +279,13 @@ function NanoIDGenerator() {
         <div className="flex items-center gap-3 text-xs">
           <div className="flex items-center gap-1.5">
             <label className="text-muted-foreground">Length</label>
-            <input
+            <Input
               type="number"
               min={1}
               max={256}
               value={length}
               onChange={(e) => setLength(Math.max(1, Math.min(256, Number(e.target.value) || 21)))}
-              className="w-14 rounded-md border px-2 py-1 text-center text-xs outline-none"
-              style={{ background: c.bg, borderColor: c.border, color: c.text }}
+              className="h-7 w-14 px-2 text-center text-xs"
             />
           </div>
           <span className="text-border">|</span>
@@ -293,7 +295,7 @@ function NanoIDGenerator() {
           <InfoTooltip text="Time to brute-force at 10 billion guesses/second. Average case (half keyspace). Real-world attacks are much slower due to network latency and rate limiting." />
         </div>
       </div>
-    </Card>
+    </UtilityCard>
   );
 }
 
@@ -332,7 +334,7 @@ function Base64Tool() {
   }, [output]);
 
   return (
-    <Card
+    <UtilityCard
       icon={<FileDigitIcon className="size-4" />}
       title="Base64"
       info="Encode binary or text data into ASCII using Base64 (RFC 4648). Commonly used for data URIs, embedding images in CSS/HTML, and transmitting binary data over text-only channels."
@@ -354,7 +356,7 @@ function Base64Tool() {
             <TooltipContent side="top">Swap input/output</TooltipContent>
           </Tooltip>
         </div>
-        <textarea
+        <Textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={
@@ -362,13 +364,9 @@ function Base64Tool() {
           }
           spellCheck={false}
           rows={2}
-          className="w-full resize-none rounded-lg border p-3 font-mono text-sm leading-relaxed outline-none"
-          style={{ background: c.bg, borderColor: c.border, color: c.text }}
+          className="min-h-0 resize-none font-mono leading-relaxed"
         />
-        <div
-          className="flex items-start gap-2 rounded-lg border px-3 py-2.5"
-          style={{ background: c.bg, borderColor: c.border }}
-        >
+        <div className="border-input flex items-start gap-2 rounded-md border bg-transparent px-3 py-2.5">
           <span
             className={cn(
               'flex-1 font-mono text-sm leading-relaxed break-all',
@@ -381,7 +379,7 @@ function Base64Tool() {
           {output && !output.startsWith('⚠') && <CopyButton value={output} compact />}
         </div>
       </div>
-    </Card>
+    </UtilityCard>
   );
 }
 
@@ -413,7 +411,7 @@ function URLTool() {
   }, [output]);
 
   return (
-    <Card
+    <UtilityCard
       icon={<LinkIcon className="size-4" />}
       title="URL Encode/Decode"
       info="Encode special characters for use in URLs using percent-encoding (RFC 3986). Spaces become %20, ampersands become %26, etc. Essential for building query strings and handling user input in URLs."
@@ -435,7 +433,7 @@ function URLTool() {
             <TooltipContent side="top">Swap input/output</TooltipContent>
           </Tooltip>
         </div>
-        <textarea
+        <Textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={
@@ -445,13 +443,9 @@ function URLTool() {
           }
           spellCheck={false}
           rows={2}
-          className="w-full resize-none rounded-lg border p-3 font-mono text-sm leading-relaxed outline-none"
-          style={{ background: c.bg, borderColor: c.border, color: c.text }}
+          className="min-h-0 resize-none font-mono leading-relaxed"
         />
-        <div
-          className="flex items-start gap-2 rounded-lg border px-3 py-2.5"
-          style={{ background: c.bg, borderColor: c.border }}
-        >
+        <div className="border-input flex items-start gap-2 rounded-md border bg-transparent px-3 py-2.5">
           <span
             className={cn(
               'flex-1 font-mono text-sm leading-relaxed break-all',
@@ -464,7 +458,7 @@ function URLTool() {
           {output && !output.startsWith('⚠') && <CopyButton value={output} compact />}
         </div>
       </div>
-    </Card>
+    </UtilityCard>
   );
 }
 
@@ -499,20 +493,19 @@ function HashGenerator() {
   }, []);
 
   return (
-    <Card
+    <UtilityCard
       icon={<ShieldCheckIcon className="size-4" />}
       title="Hash Generator"
       info="Cryptographic hash functions produce a fixed-size digest from any input. SHA-256 is the most widely used. SHA-1 is deprecated for security but still used for checksums. Hashes are one-way: you cannot reverse them to get the original input."
     >
       <div className="space-y-3">
-        <textarea
+        <Textarea
           value={input}
           onChange={(e) => handleInputChange(e.target.value)}
           placeholder="Enter text to hash..."
           spellCheck={false}
           rows={3}
-          className="w-full resize-none rounded-lg border p-3 font-mono text-sm leading-relaxed outline-none"
-          style={{ background: c.bg, borderColor: c.border, color: c.text }}
+          className="min-h-0 resize-none font-mono leading-relaxed"
         />
         {input && (
           <div className="space-y-2">
@@ -540,7 +533,7 @@ function HashGenerator() {
           </div>
         )}
       </div>
-    </Card>
+    </UtilityCard>
   );
 }
 

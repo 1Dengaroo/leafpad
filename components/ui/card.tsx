@@ -6,23 +6,44 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card"
-      className={cn('bg-card text-card-foreground rounded-lg border', className)}
+      className={cn('bg-card text-card-foreground rounded-xl shadow-md', className)}
+      style={{
+        borderWidth: 'var(--card-border-width, 1px)',
+        borderStyle: 'solid',
+        borderColor: 'hsl(var(--border))'
+      }}
       {...props}
     />
   );
 }
 
 function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-header" className={cn('flex flex-col gap-1.5 p-4', className)} {...props} />;
+  return (
+    <div
+      data-slot="card-header"
+      className={cn('flex flex-col gap-1.5 p-4', className)}
+      {...props}
+    />
+  );
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-title" className={cn('font-semibold leading-none', className)} {...props} />;
+  return (
+    <div
+      data-slot="card-title"
+      className={cn('leading-none font-semibold', className)}
+      {...props}
+    />
+  );
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div data-slot="card-description" className={cn('text-muted-foreground text-sm', className)} {...props} />
+    <div
+      data-slot="card-description"
+      className={cn('text-muted-foreground text-sm', className)}
+      {...props}
+    />
   );
 }
 
@@ -31,7 +52,13 @@ function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return <div data-slot="card-footer" className={cn('flex items-center px-4 pb-4', className)} {...props} />;
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn('flex items-center px-4 pb-4', className)}
+      {...props}
+    />
+  );
 }
 
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };

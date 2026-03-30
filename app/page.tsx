@@ -41,9 +41,7 @@ function BentoCard({
           <ArrowRightIcon className="text-muted-foreground size-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
         </CardHeader>
         <CardDescription className="mb-4 text-xs leading-relaxed">{description}</CardDescription>
-        <CardContent className="mt-auto flex-1 p-0">
-          {children}
-        </CardContent>
+        <CardContent className="mt-auto flex-1 p-0">{children}</CardContent>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
             <span
@@ -78,16 +76,14 @@ export default function LandingPage() {
                 <h1
                   className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
                   style={{
-                    fontFamily:
-                      'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
                   }}
                 >
                   Leafpad
                 </h1>
               </div>
               <p className="text-muted-foreground max-w-md text-sm leading-relaxed sm:text-base">
-                Developer tools that stay out of your way. Clean, fast, and
-                entirely free.
+                Developer tools that stay out of your way. Clean, fast, and entirely free.
               </p>
             </div>
 
@@ -102,37 +98,22 @@ export default function LandingPage() {
               delay="landing-delay-3"
             >
               <div className="preview-block flex-1">
-                <div
-                  className="mb-1 text-sm font-bold"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
+                <div className="mb-1 text-sm font-bold" style={{ color: 'hsl(var(--foreground))' }}>
                   # Getting Started
                 </div>
-                <div
-                  className="text-xs"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
+                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
                   Write in{' '}
-                  <span
-                    className="font-bold"
-                    style={{ color: 'hsl(var(--foreground))' }}
-                  >
+                  <span className="font-bold" style={{ color: 'hsl(var(--foreground))' }}>
                     **markdown**
                   </span>{' '}
                   with live preview.
                 </div>
-                <div
-                  className="mt-1.5 text-xs"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> GFM
-                  support
+                <div className="mt-1.5 text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> GFM support
                   <br />
-                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> Syntax
-                  highlighting
+                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> Syntax highlighting
                   <br />
-                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> Export
-                  to HTML
+                  <span style={{ color: 'hsl(var(--primary))' }}>-</span> Export to HTML
                 </div>
               </div>
             </BentoCard>
@@ -191,9 +172,7 @@ export default function LandingPage() {
                 <div className="text-muted-foreground px-1.5 py-0.5">
                   {'  '}&quot;version&quot;: 1
                 </div>
-                <div className="diff-add rounded px-1.5 py-0.5">
-                  + &quot;version&quot;: 2
-                </div>
+                <div className="diff-add rounded px-1.5 py-0.5">+ &quot;version&quot;: 2</div>
               </div>
             </BentoCard>
 
@@ -209,20 +188,16 @@ export default function LandingPage() {
             >
               <div className="preview-block flex-1 space-y-1.5">
                 <div>
-                  <span className="text-muted-foreground text-[9px] uppercase tracking-widest">
+                  <span className="text-muted-foreground text-[9px] tracking-widest uppercase">
                     UUID
                   </span>
-                  <div className="text-primary mt-0.5">
-                    f47ac10b-58cc-4372-a567-0e02b2c3d479
-                  </div>
+                  <div className="text-primary mt-0.5">f47ac10b-58cc-4372-a567-0e02b2c3d479</div>
                 </div>
                 <div>
-                  <span className="text-muted-foreground text-[9px] uppercase tracking-widest">
+                  <span className="text-muted-foreground text-[9px] tracking-widest uppercase">
                     NanoID
                   </span>
-                  <div className="text-primary mt-0.5">
-                    V1StGXR8_Z5jdHi6B-myT
-                  </div>
+                  <div className="text-primary mt-0.5">V1StGXR8_Z5jdHi6B-myT</div>
                 </div>
               </div>
             </BentoCard>
@@ -238,16 +213,10 @@ export default function LandingPage() {
               delay="landing-delay-7"
             >
               <div className="preview-block flex-1 space-y-1">
-                <div
-                  className="text-xs font-medium"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
+                <div className="text-xs font-medium" style={{ color: 'hsl(var(--foreground))' }}>
                   Meeting notes
                 </div>
-                <div
-                  className="text-xs"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
+                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
                   Review API changes before deploy...
                 </div>
                 <div
@@ -259,10 +228,7 @@ export default function LandingPage() {
                 >
                   TODO
                 </div>
-                <div
-                  className="text-xs"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
+                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>
                   Fix auth middleware bug
                 </div>
               </div>

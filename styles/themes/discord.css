@@ -1,0 +1,73 @@
+/* ============================================================
+   Theme: Discord
+   Mood:  Blurple on dark gray — bold, playful, high-contrast
+   ============================================================ */
+
+[data-theme='discord'] {
+  color-scheme: dark;
+
+  /* ── Semantic tokens (oklch L C H) ── */
+
+  --accent-primary: 0.55 0.18 270;
+  --accent-secondary: 0.5 0.14 280;
+
+  --surface-primary: 0.22 0.01 260;
+  --surface-secondary: 0.25 0.012 260;
+  --surface-elevated: 0.28 0.014 260;
+  --surface-overlay: 0.12 0.008 260;
+
+  --border-default: 0.3 0.015 260;
+  --border-subtle: 0.26 0.01 260;
+  --border-strong: 0.38 0.02 260;
+
+  --text-primary: 0.95 0.005 260;
+  --text-secondary: 0.75 0.008 260;
+  --text-muted: 0.55 0.006 260;
+  --text-inverse: 0.15 0.01 260;
+
+  /* ── Elevation ── */
+
+  --elevation-sm: 0 1px 3px oklch(0 0 0 / 0.24), 0 1px 2px oklch(0 0 0 / 0.16);
+  --elevation-md: 0 4px 12px oklch(0 0 0 / 0.32), 0 2px 4px oklch(0 0 0 / 0.16);
+  --elevation-lg: 0 8px 24px oklch(0 0 0 / 0.4), 0 4px 8px oklch(0 0 0 / 0.2);
+
+  /* ── Shape ── */
+
+  --radius: 0.5rem;
+  --card-border-width: 0px;
+
+  /* ── shadcn bridge tokens (HSL) ── */
+
+  --background: 228 7% 14%;
+  --foreground: 210 10% 93%;
+  --card: 228 7% 17%;
+  --card-foreground: 210 10% 93%;
+  --popover: 228 7% 12%;
+  --popover-foreground: 210 10% 93%;
+  --primary: 235 86% 65%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 228 6% 24%;
+  --secondary-foreground: 210 8% 85%;
+  --muted: 228 6% 20%;
+  --muted-foreground: 215 6% 52%;
+  --accent: 228 6% 20%;
+  --accent-foreground: 210 10% 93%;
+  --destructive: 359 82% 63%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 228 6% 22%;
+  --input: 228 6% 22%;
+  --ring: 235 86% 65%;
+  --chart-1: 235 80% 62%;
+  --chart-2: 139 47% 44%;
+  --chart-3: 359 82% 63%;
+  --chart-4: 38 96% 64%;
+  --chart-5: 197 71% 52%;
+  --sidebar-background: 228 7% 11%;
+  --sidebar-foreground: 215 6% 50%;
+  --sidebar-primary: 235 86% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 228 6% 16%;
+  --sidebar-accent-foreground: 210 10% 93%;
+  --sidebar-border: 228 6% 18%;
+  --sidebar-ring: 235 86% 60%;
+}

@@ -12,9 +12,9 @@ export interface ThemeDefinition {
 
 export const themes: ThemeDefinition[] = [
   {
-    id: 'meadow',
-    name: 'Meadow',
-    description: 'Fresh spring green, warm and clear',
+    id: 'light',
+    name: 'Light',
+    description: 'Fresh spring green, soft and airy',
     isDark: false,
     previewColors: {
       bg: 'hsl(48 28% 96%)',
@@ -23,8 +23,8 @@ export const themes: ThemeDefinition[] = [
     }
   },
   {
-    id: 'canopy',
-    name: 'Canopy',
+    id: 'dark',
+    name: 'Dark',
     description: 'Deep forest dark, rich and quiet',
     isDark: true,
     previewColors: {
@@ -34,47 +34,47 @@ export const themes: ThemeDefinition[] = [
     }
   },
   {
-    id: 'grove',
-    name: 'Grove',
-    description: 'Sage on cool gray, calm and minimal',
-    isDark: false,
-    previewColors: {
-      bg: 'hsl(200 10% 97%)',
-      primary: 'hsl(162 30% 40%)',
-      accent: 'hsl(180 8% 93%)'
-    }
-  },
-  {
-    id: 'moss',
-    name: 'Moss',
-    description: 'Warm dark earth, soft and organic',
+    id: 'discord',
+    name: 'Discord',
+    description: 'Blurple on dark gray, bold and playful',
     isDark: true,
     previewColors: {
-      bg: 'hsl(50 16% 8%)',
-      primary: 'hsl(128 38% 48%)',
-      accent: 'hsl(50 10% 14%)'
+      bg: 'hsl(228 7% 14%)',
+      primary: 'hsl(235 86% 65%)',
+      accent: 'hsl(228 6% 20%)'
     }
   },
   {
-    id: 'fern',
-    name: 'Fern',
-    description: 'Bright emerald, bold and modern',
+    id: 'claude',
+    name: 'Claude',
+    description: 'Warm sand and terracotta, thoughtful',
     isDark: false,
     previewColors: {
-      bg: 'hsl(0 0% 99%)',
-      primary: 'hsl(152 50% 34%)',
-      accent: 'hsl(150 10% 94%)'
+      bg: 'hsl(40 33% 97%)',
+      primary: 'hsl(24 70% 50%)',
+      accent: 'hsl(36 14% 93%)'
     }
   },
   {
-    id: 'thicket',
-    name: 'Thicket',
-    description: 'Deep teal on charcoal, sharp and focused',
+    id: 'spotify',
+    name: 'Spotify',
+    description: 'Vibrant green on jet black, bold',
     isDark: true,
     previewColors: {
-      bg: 'hsl(195 20% 7%)',
-      primary: 'hsl(180 50% 45%)',
-      accent: 'hsl(195 12% 14%)'
+      bg: 'hsl(0 0% 7%)',
+      primary: 'hsl(141 73% 42%)',
+      accent: 'hsl(0 0% 14%)'
+    }
+  },
+  {
+    id: 'monokai',
+    name: 'Monokai',
+    description: 'Warm muted dark with soft pink and green',
+    isDark: true,
+    previewColors: {
+      bg: 'hsl(330 5% 11%)',
+      primary: 'hsl(349 60% 64%)',
+      accent: 'hsl(330 4% 15%)'
     }
   }
 ];

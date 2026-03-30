@@ -1,14 +1,14 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@import './themes/meadow.css';
-@import './themes/canopy.css';
-@import './themes/grove.css';
-@import './themes/moss.css';
-@import './themes/fern.css';
-@import './themes/thicket.css';
+@import './themes/light.css';
+@import './themes/dark.css';
+@import './themes/discord.css';
+@import './themes/claude.css';
+@import './themes/spotify.css';
+@import './themes/monokai.css';
 
-@custom-variant dark (&:is([data-theme="canopy"] *, [data-theme="moss"] *, [data-theme="thicket"] *));
+@custom-variant dark (&:is([data-theme="dark"] *, [data-theme="discord"] *, [data-theme="spotify"] *, [data-theme="monokai"] *));
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -59,9 +59,6 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-  [data-slot="card"] {
-    border-width: var(--card-border-width, 1px);
   }
 }
 
@@ -272,12 +269,24 @@
   animation: landing-scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.landing-delay-1 { animation-delay: 0.05s; }
-.landing-delay-3 { animation-delay: 0.2s; }
-.landing-delay-4 { animation-delay: 0.28s; }
-.landing-delay-5 { animation-delay: 0.36s; }
-.landing-delay-6 { animation-delay: 0.44s; }
-.landing-delay-7 { animation-delay: 0.52s; }
+.landing-delay-1 {
+  animation-delay: 0.05s;
+}
+.landing-delay-3 {
+  animation-delay: 0.2s;
+}
+.landing-delay-4 {
+  animation-delay: 0.28s;
+}
+.landing-delay-5 {
+  animation-delay: 0.36s;
+}
+.landing-delay-6 {
+  animation-delay: 0.44s;
+}
+.landing-delay-7 {
+  animation-delay: 0.52s;
+}
 
 @media (max-width: 639px) {
   .landing-animate,
@@ -302,12 +311,7 @@
   width: 48px;
   height: 1px;
   margin: 0 auto;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--border)),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
 }
 
 /* ── Landing page v2: Bento grid ── */
@@ -324,9 +328,9 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto auto;
   grid-template-areas:
-    "hero      hero      hero"
-    "markdown  markdown  json"
-    "diff      utils     notepad";
+    'hero      hero      hero'
+    'markdown  markdown  json'
+    'diff      utils     notepad';
   gap: 1rem;
 }
 
@@ -334,12 +338,12 @@
   .bento-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "hero"
-      "markdown"
-      "json"
-      "diff"
-      "utils"
-      "notepad";
+      'hero'
+      'markdown'
+      'json'
+      'diff'
+      'utils'
+      'notepad';
   }
 }
 
@@ -347,19 +351,31 @@
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "hero      hero"
-      "markdown  markdown"
-      "json      diff"
-      "utils     notepad";
+      'hero      hero'
+      'markdown  markdown'
+      'json      diff'
+      'utils     notepad';
   }
 }
 
-.bento-hero    { grid-area: hero; }
-.bento-md      { grid-area: markdown; }
-.bento-json    { grid-area: json; }
-.bento-diff    { grid-area: diff; }
-.bento-utils   { grid-area: utils; }
-.bento-notepad { grid-area: notepad; }
+.bento-hero {
+  grid-area: hero;
+}
+.bento-md {
+  grid-area: markdown;
+}
+.bento-json {
+  grid-area: json;
+}
+.bento-diff {
+  grid-area: diff;
+}
+.bento-utils {
+  grid-area: utils;
+}
+.bento-notepad {
+  grid-area: notepad;
+}
 
 .preview-block {
   background: hsl(var(--muted) / 0.5);
@@ -386,26 +402,33 @@
 }
 
 .bento-card {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bento-card:hover {
   transform: translateY(-3px);
-  border-color: hsl(var(--primary) / 0.35);
-  box-shadow:
-    0 8px 24px hsl(var(--primary) / 0.08),
-    0 0 0 1px hsl(var(--primary) / 0.12);
+  box-shadow: var(--elevation-lg);
 }
 
 .bento-card:active {
   transform: translateY(0px);
 }
 
-.landing-delay-9  { animation-delay: 0.68s; }
+.landing-delay-9 {
+  animation-delay: 0.68s;
+}
 
-.json-key { color: hsl(var(--primary)); }
-.json-string { color: hsl(var(--chart-2)); }
-.json-number { color: hsl(var(--chart-4)); }
-.json-bracket { color: hsl(var(--muted-foreground)); }
+.json-key {
+  color: hsl(var(--primary));
+}
+.json-string {
+  color: hsl(var(--chart-2));
+}
+.json-number {
+  color: hsl(var(--chart-4));
+}
+.json-bracket {
+  color: hsl(var(--muted-foreground));
+}

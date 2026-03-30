@@ -1,0 +1,73 @@
+/* ============================================================
+   Theme: Claude
+   Mood:  Warm sand and terracotta — thoughtful, calm, sophisticated
+   ============================================================ */
+
+[data-theme='claude'] {
+  color-scheme: light;
+
+  /* ── Semantic tokens (oklch L C H) ── */
+
+  --accent-primary: 0.55 0.12 45;
+  --accent-secondary: 0.52 0.1 55;
+
+  --surface-primary: 0.98 0.005 70;
+  --surface-secondary: 0.96 0.007 70;
+  --surface-elevated: 1 0.002 70;
+  --surface-overlay: 0.18 0.01 60;
+
+  --border-default: 0.91 0.008 65;
+  --border-subtle: 0.94 0.005 65;
+  --border-strong: 0.82 0.012 65;
+
+  --text-primary: 0.2 0.015 50;
+  --text-secondary: 0.4 0.01 50;
+  --text-muted: 0.55 0.008 55;
+  --text-inverse: 0.98 0.005 70;
+
+  /* ── Elevation ── */
+
+  --elevation-sm: 0 1px 3px oklch(0.3 0.01 50 / 0.06), 0 1px 2px oklch(0.3 0.01 50 / 0.04);
+  --elevation-md: 0 6px 16px oklch(0.3 0.01 50 / 0.08), 0 2px 6px oklch(0.3 0.01 50 / 0.04);
+  --elevation-lg: 0 14px 32px oklch(0.3 0.01 50 / 0.1), 0 6px 12px oklch(0.3 0.01 50 / 0.05);
+
+  /* ── Shape ── */
+
+  --radius: 0.75rem;
+  --card-border-width: 1px;
+
+  /* ── shadcn bridge tokens (HSL) ── */
+
+  --background: 40 33% 97%;
+  --foreground: 30 20% 14%;
+  --card: 40 30% 99%;
+  --card-foreground: 30 20% 14%;
+  --popover: 40 30% 99%;
+  --popover-foreground: 30 20% 14%;
+  --primary: 24 70% 50%;
+  --primary-foreground: 40 40% 98%;
+  --secondary: 36 16% 90%;
+  --secondary-foreground: 30 16% 18%;
+  --muted: 38 12% 93%;
+  --muted-foreground: 30 8% 44%;
+  --accent: 36 14% 93%;
+  --accent-foreground: 30 20% 14%;
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 40 30% 98%;
+  --border: 36 12% 89%;
+  --input: 36 12% 86%;
+  --ring: 24 70% 50%;
+  --chart-1: 24 65% 48%;
+  --chart-2: 36 50% 52%;
+  --chart-3: 12 55% 50%;
+  --chart-4: 48 45% 46%;
+  --chart-5: 0 40% 48%;
+  --sidebar-background: 40 28% 96%;
+  --sidebar-foreground: 30 8% 42%;
+  --sidebar-primary: 24 70% 46%;
+  --sidebar-primary-foreground: 40 40% 98%;
+  --sidebar-accent: 36 14% 91%;
+  --sidebar-accent-foreground: 30 20% 14%;
+  --sidebar-border: 36 12% 87%;
+  --sidebar-ring: 24 70% 46%;
+}

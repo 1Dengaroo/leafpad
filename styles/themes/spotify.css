@@ -1,0 +1,73 @@
+/* ============================================================
+   Theme: Spotify
+   Mood:  Vibrant green on jet black — energetic, bold, immersive
+   ============================================================ */
+
+[data-theme='spotify'] {
+  color-scheme: dark;
+
+  /* ── Semantic tokens (oklch L C H) ── */
+
+  --accent-primary: 0.7 0.2 145;
+  --accent-secondary: 0.65 0.16 150;
+
+  --surface-primary: 0.12 0.005 0;
+  --surface-secondary: 0.16 0.005 0;
+  --surface-elevated: 0.2 0.006 0;
+  --surface-overlay: 0.06 0.003 0;
+
+  --border-default: 0.24 0.005 0;
+  --border-subtle: 0.18 0.004 0;
+  --border-strong: 0.32 0.006 0;
+
+  --text-primary: 0.97 0.003 0;
+  --text-secondary: 0.7 0.004 0;
+  --text-muted: 0.5 0.004 0;
+  --text-inverse: 0.1 0.003 0;
+
+  /* ── Elevation ── */
+
+  --elevation-sm: 0 2px 4px oklch(0 0 0 / 0.3);
+  --elevation-md: 0 8px 20px oklch(0 0 0 / 0.4), 0 2px 6px oklch(0 0 0 / 0.2);
+  --elevation-lg: 0 16px 40px oklch(0 0 0 / 0.5), 0 6px 12px oklch(0 0 0 / 0.25);
+
+  /* ── Shape ── */
+
+  --radius: 0.5rem;
+  --card-border-width: 0px;
+
+  /* ── shadcn bridge tokens (HSL) ── */
+
+  --background: 0 0% 7%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 11%;
+  --card-foreground: 0 0% 95%;
+  --popover: 0 0% 9%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 141 73% 42%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 0 0% 80%;
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 0% 50%;
+  --accent: 0 0% 14%;
+  --accent-foreground: 0 0% 95%;
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 17%;
+  --input: 0 0% 17%;
+  --ring: 141 73% 42%;
+  --chart-1: 141 68% 40%;
+  --chart-2: 200 50% 50%;
+  --chart-3: 330 60% 55%;
+  --chart-4: 45 80% 55%;
+  --chart-5: 270 50% 58%;
+  --sidebar-background: 0 0% 4%;
+  --sidebar-foreground: 0 0% 48%;
+  --sidebar-primary: 141 73% 38%;
+  --sidebar-primary-foreground: 0 0% 0%;
+  --sidebar-accent: 0 0% 10%;
+  --sidebar-accent-foreground: 0 0% 95%;
+  --sidebar-border: 0 0% 13%;
+  --sidebar-ring: 141 73% 38%;
+}

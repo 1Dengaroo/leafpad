@@ -136,7 +136,7 @@ export function SettingsDialog() {
             <select
               value={currentFont.id}
               onChange={(e) => setFont(e.target.value)}
-              className="border-input bg-background text-foreground w-full rounded-lg border px-3 py-2 text-sm outline-none"
+              className="border-input placeholder:text-muted-foreground/60 focus-visible:border-ring focus-visible:ring-ring/20 flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-colors outline-none focus-visible:ring-[3px]"
               style={{ fontFamily: `var(${currentFont.variable})` }}
             >
               {fonts.map((f) => (

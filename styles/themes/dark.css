@@ -1,9 +1,9 @@
 /* ============================================================
-   Theme: Canopy
+   Theme: Dark
    Mood:  Deep forest darkness — rich greens on near-black, quiet and focused
    ============================================================ */
 
-[data-theme='canopy'] {
+[data-theme='dark'] {
   color-scheme: dark;
 
   /* ── Semantic tokens (oklch L C H) ── */

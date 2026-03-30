@@ -92,9 +92,9 @@ describe('theme registry', () => {
   });
 
   it('getThemeDefinition returns correct theme', () => {
-    const theme = getThemeDefinition('meadow');
+    const theme = getThemeDefinition('light');
     expect(theme).toBeDefined();
-    expect(theme?.name).toBe('Meadow');
+    expect(theme?.name).toBe('Light');
   });
 
   it('getThemeDefinition returns undefined for unknown id', () => {
