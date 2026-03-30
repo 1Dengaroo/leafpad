@@ -177,7 +177,7 @@ export const CodeEditor = forwardRef<CodeEditorHandle, CodeEditorProps>(function
       aria-label={placeholder ?? 'Markdown editor'}
       onKeyDown={handleWrapperKeyDown}
       onClick={enterEditor}
-      className="focus:ring-ring/50 flex h-full overflow-hidden rounded-lg border focus:ring-2 focus:outline-none"
+      className="focus:ring-ring/50 flex h-full overflow-hidden border focus:ring-2 focus:outline-none"
       style={{ background: c.bg, borderColor: c.border }}
     >
       {/* Line numbers gutter */}

@@ -7,8 +7,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import {
@@ -75,9 +73,7 @@ function getActiveTool(pathname: string): Tool | null {
 export function ToolSwitcher() {
   const pathname = usePathname();
   const activeTool = getActiveTool(pathname);
-  const activeLabel = activeTool
-    ? (tools.find((t) => t.id === activeTool)?.label ?? 'Select Tool...')
-    : 'Select Tool...';
+  const active = tools.find((t) => t.id === activeTool);
 
   return (
     <DropdownMenu>
@@ -85,15 +81,14 @@ export function ToolSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="gap-1.5 text-base font-bold tracking-tight sm:gap-2 sm:text-lg"
+          className="gap-1.5 px-2 text-sm font-medium"
         >
-          {activeLabel}
-          <ChevronDownIcon className="size-3.5 opacity-50 sm:size-4" />
+          {active && <span className="text-muted-foreground">{active.icon}</span>}
+          <span>{active?.label ?? 'Select Tool...'}</span>
+          <ChevronDownIcon className="text-muted-foreground size-3.5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56">
-        <DropdownMenuLabel>Tools</DropdownMenuLabel>
-        <DropdownMenuSeparator />
         {tools.map((t) => (
           <DropdownMenuItem key={t.id} asChild>
             <Link href={t.href} className="gap-3 py-2">

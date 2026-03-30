@@ -10,20 +10,23 @@ export function ToolPage({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-background text-foreground flex h-screen flex-col overflow-y-auto md:overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between border-b px-3 py-2.5 sm:px-4 sm:py-3">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link href="/" className="flex items-center gap-2 sm:gap-2.5">
-            <Image src="/logo.svg" alt="Leafpad" width={22} height={22} className="select-none" />
-            <span className="hidden text-lg font-bold tracking-tight sm:inline">Leafpad</span>
+      <header className="flex items-center justify-between border-b px-3 py-2 sm:px-4 sm:py-2.5">
+        <div className="flex items-center gap-1">
+          <Link
+            href="/"
+            className="hover:bg-accent/60 flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors sm:gap-2.5"
+          >
+            <Image src="/logo.svg" alt="Leafpad" width={20} height={20} className="select-none" />
+            <span className="text-sm font-semibold tracking-tight sm:text-[15px]">Leafpad</span>
           </Link>
-          <span className="text-border hidden sm:inline">|</span>
+          <span className="text-border text-xs">/</span>
           <ToolSwitcher />
         </div>
-        <div className="flex gap-1">
+        <div className="flex items-center gap-0.5">
           <SettingsDialog />
           <AboutDialog />
         </div>
-      </div>
+      </header>
 
       {/* Active tool */}
       {children}
