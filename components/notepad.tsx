@@ -201,8 +201,12 @@ function NoteCard({
             value={note.title}
             onChange={(e) => onChange({ title: e.target.value })}
             placeholder="Title"
-            disabled={isSelecting}
-            className="h-auto border-none px-0 py-0 text-sm font-semibold shadow-none focus-visible:ring-0"
+            tabIndex={isSelecting ? -1 : 0}
+            className={cn(
+              'h-auto rounded-none border-transparent px-0 py-1 text-sm font-semibold shadow-none',
+              'focus-visible:border-b-primary focus-visible:ring-0',
+              isSelecting && 'pointer-events-none'
+            )}
             style={{ userSelect: 'text' }}
           />
           <Textarea
@@ -213,11 +217,13 @@ function NoteCard({
               resizeTextarea(e.target);
             }}
             placeholder="Description"
-            disabled={isSelecting}
+            tabIndex={isSelecting ? -1 : 0}
             rows={2}
             className={cn(
-              'min-h-0 resize-none border-none px-0 py-0 shadow-none focus-visible:ring-0',
-              'text-[16px] sm:text-sm'
+              'min-h-0 resize-none rounded-none border-transparent px-0 py-1 shadow-none',
+              'focus-visible:border-b-primary focus-visible:ring-0',
+              'text-[16px] sm:text-sm',
+              isSelecting && 'pointer-events-none'
             )}
             style={{ userSelect: 'text' }}
           />
